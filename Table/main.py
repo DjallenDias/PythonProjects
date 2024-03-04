@@ -1,11 +1,11 @@
 import table
 
 # The values and keys to the dictionary
-chaves = ['names', 'ages']
-valores = [['john', 'mary'],[18,20]]
+keys = ['names', 'ages']
+values = [['john', 'mary'],[18,20]]
 
 # Creating the dict and showing
-itable = table.ItemTable(chaves, valores)
+itable = table.ItemTable(keys, values)
 itable.show_table()
 
 print(itable.sum_all_columns())
@@ -38,7 +38,7 @@ itable.show_table()
 
 
 
-csv_chaves, csv_valores = table.csv_reader("csv path") # Function to open a csv
+csv_keys, csv_values = table.csv_reader("csv path") # Function to open a csv
 
-csvtable = table.ItemTable(csv_chaves,csv_valores)
+csvtable = table.ItemTable(csv_keys,csv_values)
 csvtable.show_table()
