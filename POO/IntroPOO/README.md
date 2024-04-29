@@ -1,0 +1,1 @@
+Here I will show how to understand a little about POO
