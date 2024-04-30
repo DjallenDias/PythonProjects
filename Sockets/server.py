@@ -1,10 +1,8 @@
 import socket
 import threading
-import argparse
 
 from chat import Chat
-
-chat = Chat()
+from cli import Cli
 
 def recieve(conn):
     while thread_run:
@@ -14,17 +12,11 @@ def recieve(conn):
         chat.show_chat()
         print()
 
-parser = argparse.ArgumentParser(description="Chat Server side socket")
-parser.add_argument("HOST", help="Host or Address to server run on")
-parser.add_argument("PORT", help="Port for the server to check for connections", type=int)
-parser.add_argument("--username")
+chat = Chat()
+cli = Cli("Server")
 
-args = parser.parse_args()
+args = cli.parse_args()
 
-if (args.username):
-    username = args.username
-else:
-    username = "guest"
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((args.HOST, args.PORT))
