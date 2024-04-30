@@ -1,14 +1,18 @@
-import sys
 import socket
 import threading
 import argparse
 
+from chat import Chat
+
+chat = Chat()
+
 def recieve(conn):
     while thread_run:
         data = conn.recv(1024).decode()
-        if not data: break
-        print(data)
-
+        if data == "": break
+        chat.update_chat(data)
+        chat.show_chat()
+        print()
 
 parser = argparse.ArgumentParser(description="Chat Server side socket")
 parser.add_argument("HOST", help="Host or Address to server run on")
@@ -29,16 +33,19 @@ sock.listen()
 conn, addr = sock.accept()
 
 thread_run = True
-
 recieve_thread = threading.Thread(target=recieve, args=[conn])
 recieve_thread.start()
 
 while True:
     msg = input()
-    if not msg: 
+    if msg == "":
         thread_run = False
         conn.close()
         break
     conn.send(msg.encode())
+    chat.update_chat(f">> {msg!r}")
+    chat.show_chat()
+    print()
 
+conn.close()
 sock.close()
