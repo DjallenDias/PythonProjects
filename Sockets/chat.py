@@ -2,6 +2,7 @@ import os
 
 class Chat(list):
     def __init__(self, max_len=6):
+        super().__init__([" "]*max_len)
         self.MAX_LENGTH = max_len
     
     def clear_chat(self):

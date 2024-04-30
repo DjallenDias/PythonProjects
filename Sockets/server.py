@@ -1,40 +1,18 @@
-import os
 import socket
 import threading
 import argparse
 
-MAX_MSG_HIST = 20
+from chat import Chat
 
-msg_hist = []
-
-# improve the list for saving the server and client msgs, on both sides
-
-def clear():
-    if (os.name == "nt"):
-        os.system("cls")
-    else:
-        os.system("clear")
-
-def show_mesages():
-    clear()
-    for msg in msg_hist[::-1]:
-        print(msg)
-    print(".\n.\n")
-
-def update_msg_hist(msg):
-    if len(msg_hist) > MAX_MSG_HIST:
-        del msg_hist[-1]
-    
-    msg_hist.insert(0, msg)
-    show_mesages()
+chat = Chat()
 
 def recieve(conn):
     while thread_run:
         data = conn.recv(1024).decode()
-        if data == "":
-            clear()
-            break
-        update_msg_hist(data)
+        if data == "": break
+        chat.update_chat(data)
+        chat.show_chat()
+        print()
 
 parser = argparse.ArgumentParser(description="Chat Server side socket")
 parser.add_argument("HOST", help="Host or Address to server run on")
@@ -63,9 +41,11 @@ while True:
     if msg == "":
         thread_run = False
         conn.close()
-        clear()
         break
     conn.send(msg.encode())
+    chat.update_chat(f">> {msg!r}")
+    chat.show_chat()
+    print()
 
 conn.close()
 sock.close()
