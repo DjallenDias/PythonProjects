@@ -9,3 +9,5 @@ python server.py [localhost] [port]
 ```
 python client.py [localhost] [port]
 ```
+
+If you want more information, you can type `-h` , after the file name, to have help
