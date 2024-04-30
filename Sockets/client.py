@@ -7,6 +7,8 @@ MAX_MSG_HIST = 20
 
 msg_hist = []
 
+# improve the list for saving the server and client msgs, on both sides
+
 def clear():
     if (os.name == "nt"):
         os.system("cls")
