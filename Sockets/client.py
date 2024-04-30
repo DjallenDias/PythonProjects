@@ -43,17 +43,17 @@ parser.add_argument("--username")
 
 args = parser.parse_args()
 
+if (args.username):
+    username = args.username
+else:
+    username = "guest"
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((args.HOST, args.PORT))
 
 thread_run = True
 recieve_thread = threading.Thread(target=recieve, args=[sock])
 recieve_thread.start()
-
-if (args.username):
-    username = args.username
-else:
-    username = "guest"
 
 while True:
     msg = input()
