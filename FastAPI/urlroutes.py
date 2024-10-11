@@ -24,11 +24,11 @@ async def get_user(user_id: str):
 
 @app.get("/models/{model_name}")
 async def get_model(model_name: ModelName):
-    if model_name is ModelName.alexnet:
+    if model_name is ModelName.alexnet: # different ways to compare
         return {"model_name": model_name,
                 "message": "Deep Learning FTW!"}
     
-    if model_name.value == "lenet":
+    if model_name.value == "lenet": # different ways to compare
         return {"model_name": model_name,
                 "message": "LeCNN all the images"}
     
